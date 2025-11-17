@@ -1,12 +1,11 @@
 #!/bin/bash
+cd /opt/demo
 
-# demo-0.0.1-SNAPSHOT.jar 프로세스를 찾아서 종료
-PID=$(ps -ef | grep demo-0.0.1-SNAPSHOT.jar | grep -v grep | awk '{print $2}')
-
+PID=$(pgrep -f 'demo-0.0.1-SNAPSHOT.jar')
 if [ -n "$PID" ]; then
-  echo "Stopping application with PID: $PID"
-  kill $PID
-  sleep 5
+  echo "Stopping application: $PID"
+  kill -9 "$PID"
 else
-  echo "Application not running"
+  echo "No running application found."
 fi
+
